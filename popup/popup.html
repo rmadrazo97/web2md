@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=380">
+  <title>Web to Markdown</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div id="app" class="state-loading">
+
+    <!-- ===== Header ===== -->
+    <header class="header">
+      <div class="header__top">
+        <h1 class="header__title">Web &rarr; Markdown</h1>
+        <div class="header__actions">
+          <a class="header-btn" id="btn-feedback" href="https://forms.gle/uwP1qeQB6WpQ6xEK7" target="_blank" title="Send Feedback">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+              <polyline points="22,6 12,13 2,6"/>
+            </svg>
+          </a>
+          <button class="header-btn" id="btn-history-toggle" type="button" title="Conversion History">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <polyline points="12 6 12 12 16 14"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+      <p class="header__subtitle">Convert any article to LLM-ready markdown</p>
+    </header>
+
+    <!-- ===== History Panel ===== -->
+    <section class="history-panel" id="history-panel" aria-label="Conversion history">
+      <div class="history-panel__header">
+        <span class="history-panel__title">Recent Conversions</span>
+        <button class="history-panel__clear" id="btn-history-clear" type="button">Clear</button>
+      </div>
+      <div class="history-panel__list" id="history-list">
+        <p class="history-panel__empty" id="history-empty">No conversions yet.</p>
+      </div>
+    </section>
+
+    <!-- ===== Unsupported Page State ===== -->
+    <section class="unsupported-view" aria-label="Unsupported page">
+      <div class="unsupported-view__icon" aria-hidden="true">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="12" y1="8" x2="12" y2="12"/>
+          <line x1="12" y1="16" x2="12.01" y2="16"/>
+        </svg>
+      </div>
+      <p class="unsupported-view__message">Not on a supported page</p>
+      <p class="unsupported-view__hint">Open any article or blog post to convert it.</p>
+    </section>
+
+    <!-- ===== Loading State (Skeletons) ===== -->
+    <section class="loading-view" aria-label="Loading" aria-live="polite">
+      <div class="skeleton skeleton--title"></div>
+      <div class="skeleton skeleton--author"></div>
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="skeleton skeleton--stat-label"></div>
+          <div class="skeleton skeleton--stat-value"></div>
+        </div>
+        <div class="stat-card">
+          <div class="skeleton skeleton--stat-label"></div>
+          <div class="skeleton skeleton--stat-value"></div>
+        </div>
+      </div>
+      <div class="skeleton skeleton--preview"></div>
+      <div class="actions">
+        <button class="btn btn--primary" disabled>Copy to Clipboard</button>
+        <button class="btn btn--secondary" disabled>Download .md</button>
+      </div>
+    </section>
+
+    <!-- ===== Success State ===== -->
+    <section class="success-view" aria-label="Conversion result">
+      <!-- Metadata -->
+      <div class="metadata">
+        <h2 class="metadata__title" id="article-title"></h2>
+        <div class="metadata__row">
+          <span class="metadata__author" id="article-author"></span>
+          <span class="badge" id="platform-badge"></span>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats-row">
+        <div class="stat-card">
+          <span class="stat-card__label">Words</span>
+          <span class="stat-card__value" id="word-count">0</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-card__label">Est. Tokens</span>
+          <span class="stat-card__value" id="token-count">0</span>
+        </div>
+      </div>
+
+      <!-- Preview -->
+      <div class="preview" aria-label="Markdown preview">
+        <pre class="preview__content" id="preview-text"></pre>
+      </div>
+
+      <!-- Actions -->
+      <div class="actions">
+        <button class="btn btn--primary" id="btn-copy" type="button">
+          <span class="btn__label">Copy to Clipboard</span>
+          <span class="btn__spinner" aria-hidden="true"></span>
+        </button>
+        <button class="btn btn--secondary" id="btn-download" type="button">
+          <span class="btn__label">Download .md</span>
+          <span class="btn__spinner" aria-hidden="true"></span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ===== Error State ===== -->
+    <section class="error-view" aria-label="Error" aria-live="assertive">
+      <div class="error-view__icon" aria-hidden="true">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"/>
+          <line x1="15" y1="9" x2="9" y2="15"/>
+          <line x1="9" y1="9" x2="15" y2="15"/>
+        </svg>
+      </div>
+      <p class="error-view__message" id="error-message">Something went wrong</p>
+      <button class="btn btn--primary" id="btn-retry" type="button">
+        <span class="btn__label">Retry</span>
+      </button>
+    </section>
+
+    <!-- ===== Toast Overlay ===== -->
+    <div class="toast-container" id="toast-container" aria-live="polite"></div>
+
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
