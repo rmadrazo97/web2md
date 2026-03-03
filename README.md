@@ -1,5 +1,7 @@
 # Web to Markdown - Chrome Extension
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
 A Chrome extension that converts any web article into clean, well-structured Markdown files optimized for LLM agent context (RAG pipelines, prompt stuffing, context windows).
 
 ## Features
@@ -118,6 +120,17 @@ Popup click
 | `downloads` | Save .md files to the user's downloads folder |
 | `storage` | Store conversion history (last 10 entries) |
 
+## Contributing
+
+Contributions are welcome! To contribute to this project:
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/your-feature`)
+3. Make your changes and test on 2+ platforms (Mac, Windows, or Linux)
+4. Submit a pull request
+
+For detailed guidelines, see [CONTRIBUTING.md](CONTRIBUTING.md). By participating in this project, you agree to abide by our [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
+
 ## Limitations
 
 - Only converts **visible DOM content** — does not bypass paywalls
@@ -132,3 +145,7 @@ Popup click
 - **Turndown.js** for HTML-to-Markdown conversion
 - **Vanilla HTML/CSS/JS** — zero framework dependencies
 - Total extension size: ~55KB
+
+## License
+
+This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
