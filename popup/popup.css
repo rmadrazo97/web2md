@@ -1,37 +1,39 @@
 /* ==========================================================================
-   Web -> Markdown  |  Popup Styles
+   Web2Markdown  |  Popup Styles
+   Palette: Electric Green #46F34D · Tropical Mint #52E99C · Black #000101
+            Regal Navy #073478 · Blue Bell #2A91D8
    ========================================================================== */
 
 /* ---------- Custom Properties (Light Theme) ---------- */
 :root {
   --bg-primary: #ffffff;
-  --bg-secondary: #f5f6f8;
-  --bg-tertiary: #ebedf0;
-  --text-primary: #1a1a2e;
-  --text-secondary: #5a5f72;
-  --text-tertiary: #8a8fa3;
-  --border-color: #e0e2e8;
-  --accent-color: #4f6df5;
-  --accent-hover: #3b57d9;
-  --accent-active: #2d45b8;
-  --success-color: #18a058;
-  --success-bg: #e8f8ef;
+  --bg-secondary: #f0f4f8;
+  --bg-tertiary: #e2e8f0;
+  --text-primary: #000101;
+  --text-secondary: #3a4a5c;
+  --text-tertiary: #6b7a8d;
+  --border-color: #d4dce6;
+  --accent-color: #2A91D8;
+  --accent-hover: #4AA3E2;
+  --accent-active: #1E7BBE;
+  --success-color: #46F34D;
+  --success-bg: rgba(70, 243, 77, 0.12);
   --error-color: #d94452;
   --error-bg: #fdeef0;
-  --badge-medium-bg: #18a058;
-  --badge-medium-text: #ffffff;
+  --badge-medium-bg: #46F34D;
+  --badge-medium-text: #000101;
   --badge-substack-bg: #e67e22;
   --badge-substack-text: #ffffff;
-  --badge-wordpress-bg: #21759b;
+  --badge-wordpress-bg: #2A91D8;
   --badge-wordpress-text: #ffffff;
-  --badge-twitter-bg: #1d9bf0;
+  --badge-twitter-bg: #073478;
   --badge-twitter-text: #ffffff;
-  --badge-generic-bg: #6e7290;
-  --badge-generic-text: #ffffff;
-  --skeleton-base: #e0e2e8;
-  --skeleton-shimmer: #f5f6f8;
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.06);
-  --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --badge-generic-bg: #52E99C;
+  --badge-generic-text: #000101;
+  --skeleton-base: #d4dce6;
+  --skeleton-shimmer: #e8eef4;
+  --shadow-sm: 0 1px 2px rgba(7, 52, 120, 0.08);
+  --shadow-md: 0 2px 8px rgba(7, 52, 120, 0.12);
   --radius-sm: 6px;
   --radius-md: 10px;
   --radius-lg: 14px;
@@ -42,34 +44,34 @@
 /* ---------- Dark Theme ---------- */
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg-primary: #1a1a2e;
-    --bg-secondary: #22223a;
-    --bg-tertiary: #2a2a44;
-    --text-primary: #e8e8f0;
-    --text-secondary: #a0a4b8;
-    --text-tertiary: #6e7290;
-    --border-color: #33334d;
-    --accent-color: #6b85f7;
-    --accent-hover: #849af9;
-    --accent-active: #5270e8;
-    --success-color: #36d980;
-    --success-bg: rgba(54, 217, 128, 0.12);
+    --bg-primary: #020a18;
+    --bg-secondary: #0a1e3d;
+    --bg-tertiary: #0f2a52;
+    --text-primary: #e8eef4;
+    --text-secondary: #a0b4c8;
+    --text-tertiary: #5a7a94;
+    --border-color: #0f2a52;
+    --accent-color: #2A91D8;
+    --accent-hover: #4AA3E2;
+    --accent-active: #1E7BBE;
+    --success-color: #52E99C;
+    --success-bg: rgba(82, 233, 156, 0.12);
     --error-color: #f06070;
     --error-bg: rgba(240, 96, 112, 0.12);
-    --badge-medium-bg: #2ac06a;
-    --badge-medium-text: #1a1a2e;
+    --badge-medium-bg: #46F34D;
+    --badge-medium-text: #000101;
     --badge-substack-bg: #f09844;
-    --badge-substack-text: #1a1a2e;
-    --badge-wordpress-bg: #3aa3d0;
-    --badge-wordpress-text: #1a1a2e;
-    --badge-twitter-bg: #4ab3f4;
-    --badge-twitter-text: #1a1a2e;
-    --badge-generic-bg: #8a8fa3;
-    --badge-generic-text: #1a1a2e;
-    --skeleton-base: #2a2a44;
-    --skeleton-shimmer: #33334d;
-    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.2);
-    --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.3);
+    --badge-substack-text: #000101;
+    --badge-wordpress-bg: #2A91D8;
+    --badge-wordpress-text: #000101;
+    --badge-twitter-bg: #4AA3E2;
+    --badge-twitter-text: #000101;
+    --badge-generic-bg: #52E99C;
+    --badge-generic-text: #000101;
+    --skeleton-base: #0a1e3d;
+    --skeleton-shimmer: #0f2a52;
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.4);
   }
 }
 
@@ -157,7 +159,11 @@ body {
   font-size: 1.25rem;
   font-weight: 700;
   letter-spacing: -0.01em;
-  color: var(--text-primary);
+  background: linear-gradient(90deg, #46F34D, #2A91D8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: var(--accent-color); /* fallback */
 }
 
 .header__actions {
